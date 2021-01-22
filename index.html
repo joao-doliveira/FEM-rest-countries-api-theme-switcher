@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/cd67383aec.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container header__wrap">
+            <h1 id="header__title"><a href="index.html">Where in the world?</a></h1>
+
+            <div id="header__darktheme">
+                <i class="far fa-moon" id="moonIcon"></i>
+
+                <span>Dark Mode</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="userInput">
+        <div class="container userInput__wrap">
+            <form id="searchForm">
+                <button type="submit"><i class="fas fa-search"></i></button>
+
+                <input name="query" type="text" id="searchInput" placeholder="Search for a country...">
+            </form>
+
+            <div class="regionMenu">
+                <div class="regionSelect">
+                    <p>Filter by Region</p>
+                    
+                    <i class="fas fa-angle-up" id="arrow"></i>
+                </div>
+    
+                <ul class="regionList hidden">
+                    <li class="regionItem" id="africa">Africa</li>
+                    <li class="regionItem" id="americas">Americas</li>
+                    <li class="regionItem" id="asia">Asia</li>
+                    <li class="regionItem" id="europe">Europe</li>
+                    <li class="regionItem" id="oceania">Oceania</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <main class="deck">
+        <div class="container deck__wrap">
+            
+        </div>
+    </main>
+
+    <section class="details hidden" >
+
+    </section>
+    
+    <script src="app.js"></script>
+</body>
+</html>
