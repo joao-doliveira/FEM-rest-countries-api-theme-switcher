@@ -19,8 +19,6 @@ const showDetails = () => {
 const getDetail = (target) => {
     for(let i = 0; i < target.length; i++){
         target[i].addEventListener('click', () => {
-            history.pushState({name: `detail`}, null, `#${target[i].id}`)
-            
             display.innerHTML = [];
             showDetails()
             fetch(`https://restcountries.eu/rest/v2/alpha/${target[i].id}`)
