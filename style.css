@@ -148,20 +148,10 @@ header{
     cursor: pointer;
 }
 
-.deck__wrap{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .deck{
-    margin: 30px 0;
-    min-height: 100vh;
-}
-
-.deck__wrap{
     width: 70%;
-    margin: 0 auto;
+    margin: 30px auto;
+    min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
     row-gap: 40px;
@@ -343,7 +333,7 @@ header{
 @media(min-width:576px){
     /* main */
 
-    .deck__wrap{
+    .deck{
         width: 89%;
         grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     }
@@ -412,9 +402,6 @@ header{
 
     .deck{
         margin-top: 45px;
-    }
-
-    .deck__wrap{
         row-gap: 90px;
     }
 

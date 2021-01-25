@@ -6,16 +6,23 @@ const newElement = (el, cl) => {
     return newEl
 }
 
-const contentToggle = () => {
-    deck.classList.toggle('hidden')
-    details.classList.toggle('hidden')
+const showDeck = () => {
+    display.classList.add('deck')
+    display.classList.remove('details')
+}
+
+const showDetails = () => {
+    display.classList.add('details')
+    display.classList.remove('deck')
 }
 
 const getDetail = (target) => {
     for(let i = 0; i < target.length; i++){
         target[i].addEventListener('click', () => {
-            details.innerHTML = [];
-            contentToggle()
+            history.pushState({name: `detail`}, null, `#${target[i].id}`)
+            
+            display.innerHTML = [];
+            showDetails()
             fetch(`https://restcountries.eu/rest/v2/alpha/${target[i].id}`)
             .then(res => res.json())
             .then(data => detailsBuilder(data))
@@ -43,7 +50,7 @@ const cardBuilder = (data) => {
         let dataCardCap = newElement('li', 'card__item')
         let dataCardCapSpan = newElement('span', 'card__data')
 
-        deckWrap.append(dataCard)
+        display.append(dataCard)
         dataCard.id = item.alpha3Code
 
         dataCard.append(dataCardFlag)
@@ -109,7 +116,7 @@ const detailsBuilder = (detailsData) => {
     let dataBorderLinks = newElement('div', 'border__links')
     
 
-    details.append(dataBack)
+    display.append(dataBack)
     dataBack.append(dataBackButton)
     dataBackButton.append(dataBackButtonA)
     dataBackButtonA.setAttribute('href', 'index.html')
@@ -117,7 +124,7 @@ const detailsBuilder = (detailsData) => {
     dataBackButtonA.append(dataIcon, 'Back')
     dataIcon.classList.add('fa-long-arrow-alt-left')
 
-    details.append(dataContent)
+    display.append(dataContent)
     dataContent.append(dataContentFlag)
     dataContentFlag.append(dataContentDataFlag)
     dataContentDataFlag.setAttribute('src', detailsData.flag)
@@ -171,7 +178,7 @@ const borderBuilder = (parent, el, cl, iterable) => {
         .then((json) => {
             child.textContent = json.name
             child.addEventListener('click', () => {
-                details.innerHTML = [];
+                display.innerHTML = [];
                 detailsBuilder(json)
             })
         }) 
@@ -181,15 +188,9 @@ const borderBuilder = (parent, el, cl, iterable) => {
 
 // opening page
 
-
-
 let allCards = [];
-
-
 const headerTitle = document.querySelector('.header__title')
-const deck = document.querySelector('.deck');
-const deckWrap = document.querySelector('.deck__wrap');
-const details = document.querySelector('.details');
+const display  = document.querySelector('#display')
 
 fetch('https://restcountries.eu/rest/v2/all')
     .then(res => res.json())
@@ -211,12 +212,8 @@ regionSelect.addEventListener('click', () => {
 
 for (let i = 0; i < regionItems.length; i++) {
     regionItems[i].addEventListener('click', () => {
-        if(details.children.length !== 0){
-            contentToggle()
-            details.innerHTML = [];
-        }
-
-        deckWrap.innerHTML = [];
+        display.innerHTML = [];
+        showDeck()
         console.log(`clicked! ${regionItems[i].id}`)
         fetch(`https://restcountries.eu/rest/v2/region/${regionItems[i].id}`)
         .then(res => res.json())
@@ -232,11 +229,7 @@ const searchForm = document.querySelector('#searchForm');
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if(details.children.length !== 0){
-        contentToggle()
-    }
-
-    deckWrap.innerHTML = [];
+    display.innerHTML = [];
     console.log('submitted!');
     const searchTerm = searchForm.elements.query.value;
     fetch(`https://restcountries.eu/rest/v2/name/${searchTerm}`)
